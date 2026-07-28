@@ -119,6 +119,13 @@ STORAGES = {
     },
 }
 
+# Serves the vendored React production build (frontend_dist/, built via
+# `npm run build` in ../frontend and copied here) so a single Railway
+# service serves both the API and the SPA — no separate static host needed.
+FRONTEND_DIST = BASE_DIR / "frontend_dist"
+if FRONTEND_DIST.exists():
+    WHITENOISE_ROOT = FRONTEND_DIST
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
